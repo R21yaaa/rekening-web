@@ -11,7 +11,7 @@ export interface ValidationResponse {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "https://api.qrisvalidation.com",
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
