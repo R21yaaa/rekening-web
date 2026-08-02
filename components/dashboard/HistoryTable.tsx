@@ -83,8 +83,6 @@ export default function HistoryTable({
         <div className="space-y-4">
 
           {history
-            .slice()
-            .reverse()
             .map((item, index) => (
 
               <div

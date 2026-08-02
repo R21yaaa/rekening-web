@@ -34,23 +34,17 @@ export default function Home() {
 
   const handleResult = (data: ValidationResult) => {
 
-    setResult(data);
+  setResult(data);
 
-    setHistory((prev) => [
+  setHistory((prev) => [
+    {
+      ...data,
+      waktu: new Date().toLocaleTimeString("id-ID"),
+    },
+    ...prev,
+  ].slice(0, 3));
 
-      {
-
-        ...data,
-
-        waktu: new Date().toLocaleTimeString("id-ID"),
-
-      },
-
-      ...prev,
-
-    ]);
-
-  };
+};
 
   const stats = useMemo(() => {
 
