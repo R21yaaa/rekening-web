@@ -25,7 +25,7 @@ export async function validateAccount(
 ): Promise<ValidationResponse> {
   try {
     const { data } = await api.post<ValidationResponse>(
-      "/cekrekening",
+      "/api/cekrekening",
       {
         bankId,
         bankName,
