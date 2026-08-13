@@ -33,6 +33,9 @@
     setResult: (result: ValidationResult) => void;
   };
 
+
+  const MAINTENANCE = true;
+
   export default function ValidationCard({
     loading,
     setLoading,
@@ -56,7 +59,16 @@
     }, [search]);
     const handleValidation = async () => {
 
-      if (!bank) {
+  if (MAINTENANCE) {
+    alert(
+      "UNDER MAINTENANCE\n\n" +
+      "Fitur validasi rekening sedang dalam maintenance.\n" +
+      "Silakan coba kembali nanti."
+    );
+    return;
+  }
+
+  if (!bank) {
 
           alert("Silakan pilih bank.");
 
@@ -269,60 +281,65 @@ setResult({
   {/* BUTTON */}
 
   <GradientButton
-      onClick={handleValidation}
-      disabled={loading}
-      className="
-      h-14
-      w-full
-      rounded-2xl
-      text-lg
-      font-bold
-      transition-all
-      duration-300
-      hover:scale-[1.02]
-      shadow-2xl
-      shadow-cyan-500/20
-      "
-  >
+  onClick={handleValidation}
+  disabled={loading || MAINTENANCE}
+  className="
+    h-14
+    w-full
+    rounded-2xl
+    text-lg
+    font-bold
+    transition-all
+    duration-300
+    hover:scale-[1.02]
+    shadow-2xl
+    shadow-cyan-500/20
+  "
+>
+  {
+    MAINTENANCE ? (
 
-      {
-          loading ? (
+      <div className="flex items-center justify-center gap-3">
+        <ShieldCheck size={22} />
+        UNDER MAINTENANCE
+      </div>
 
-              <div className="flex items-center justify-center gap-3">
+    ) : loading ? (
 
-                  <div
-                      className="
-                      h-5
-                      w-5
-                      animate-spin
-                      rounded-full
-                      border-2
-                      border-white
-                      border-t-transparent
-                      "
-                  />
+      <div className="flex items-center justify-center gap-3">
 
-                  Memvalidasi Rekening...
+        <div
+          className="
+            h-5
+            w-5
+            animate-spin
+            rounded-full
+            border-2
+            border-white
+            border-t-transparent
+          "
+        />
 
-              </div>
+        Memvalidasi Rekening...
 
-          ) : (
+      </div>
 
-              <div className="flex items-center justify-center gap-3">
+    ) : (
 
-                  <Zap
-                      size={22}
-                      className="animate-pulse"
-                  />
+      <div className="flex items-center justify-center gap-3">
 
-                  VALIDASI SEKARANG
+        <Zap
+          size={22}
+          className="animate-pulse"
+        />
 
-              </div>
+        VALIDASI SEKARANG
 
-          )
-      }
+      </div>
 
-  </GradientButton>
+    )
+  }
+</GradientButton>
 
   {/* STATS */}
 
